@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Resource from '../components/Resource.astro';
+import { categories } from '../data/categories';
+import { getCatalog } from '../lib/catalog';
+const { resources } = await getCatalog();
+---
+
+<Layout
+  title="AI 工具目录"
+  description="按开发任务查找 AI 编程、Agent 与 MCP、应用开发、本地模型、搜索研究和创作资源。"
+>
+  <section class="page-head wrap directory-head">
+    <span class="meta">从任务出发，找到工具</span>
+    <h1>
+      AI 工具目录<span class="blue-dot">.</span>
+    </h1>
+    <p>24 项编辑精选，六个开发场景。每个入口，都有一个明确用途。</p>
+  </section>
+  <section class="wrap directory">
+    <div class="catalog-controls" hidden>
+      <form class="catalog-search" id="tool-search" role="search">
+        <label for="tool-query">搜索名称、简介或标签</label>
+        <div class="search-box">
+          <input
+            id="tool-query"
+            type="search"
+            name="q"
+            placeholder="例如：代码审查、MCP、Python"
+          />
+          <button class="button" type="submit">
+            搜索
+          </button>
+        </div>
+      </form>
+      <div class="category-filters" role="group" aria-label="按资源分类筛选">
+        <button data-category="all" aria-pressed="true">
+          全部 <span>{resources.length}</span>
+        </button>
+        {categories.map((c) => (
+          <button data-category={c.id} aria-pressed="false">
+            {c.name}
+            <span>
+              {resources.filter((r) => r.data.category === c.id).length}
+            </span>
+          </button>
+        ))}
+      </div>
+      <div class="catalog-summary">
+        <p role="status" id="catalog-status">
+          显示全部 {resources.length} 项资源
+        </p>
+        <button id="clear-catalog" type="button">
+          清空筛选
+        </button>
+      </div>
+    </div>
+    <nav class="category-anchors" aria-label="资源分类目录">
+      {categories.map((c) => (
+        <a href={`#${c.id}`}>{c.name} ↓</a>
+      ))}
+    </nav>
+    <div id="catalog-results">
+      {categories.map((c) => (
+        <section class="resource-group" id={c.id} data-group={c.id}>
+          <div class="group-heading">
+            <div>
+              <span class="scenario-icon" aria-hidden="true">
+                {c.symbol}
+              </span>
+              <h2>{c.name}</h2>
+            </div>
+            <p>{c.description}</p>
+          </div>
+          <div class="resource-grid">
+            {resources
+              .filter((r) => r.data.category === c.id)
+              .map((resource) => (
+                <Resource resource={resource} />
+              ))}
+          </div>
+        </section>
+      ))}
+    </div>
+    <div class="catalog-empty" hidden>
+      <span aria-hidden="true">⌕</span>
+      <h2>暂时没有匹配的资源</h2>
+      <p>试试更短的关键词，或者清空分类与搜索。</p>
+      <button class="button" id="reset-empty">
+        查看全部资源
+      </button>
+    </div>
+    <p class="catalog-footnote">
+      内容由人工整理，资料核查日期见各条目。功能与使用条件以官方说明为准。
+    </p>
+  </section>
+  <script src="../scripts/catalog.ts" />
+</Layout>

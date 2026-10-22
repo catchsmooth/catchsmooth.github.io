@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout title="作品">
+  <section class="page-head wrap">
+    <span class="meta">想法，成为可用的产品</span>
+    <h1>
+      作品与实践<span class="blue-dot">.</span>
+    </h1>
+    <p>
+      从 SaaS 平台到智能家居，从三维空间到多端服务。
+      <br />
+      这里记录我如何把复杂的问题，做成清晰的体验。
+    </p>
+  </section>
+  <section class="wrap project-list-section">
+    <div class="filters" role="group" aria-label="按作品类别筛选" hidden>
+      {['全部', 'Web', 'App', '可视化'].map((item, i) => (
+        <button data-filter={item} aria-pressed={i === 0}>
+          {item}
+        </button>
+      ))}
+    </div>
+    <p class="sr-only" role="status" id="filter-status"></p>
+    <div class="projects">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+  <script>
+    const filters = document.querySelector<HTMLElement>('.filters');
+    if (filters) {
+      filters.hidden = false;
+      filters.querySelectorAll<HTMLButtonElement>('button').forEach((button) =>
+        button.addEventListener('click', () => {
+          filters
+            .querySelectorAll('button')
+            .forEach((b) =>
+              b.setAttribute('aria-pressed', String(b === button)),
+            );
+          let count = 0;
+          document
+            .querySelectorAll<HTMLElement>('[data-category]')
+            .forEach((card) => {
+              card.hidden =
+                button.dataset.filter !== '全部' &&
+                card.dataset.category !== button.dataset.filter;
+              if (!card.hidden) count++;
+            });
+          document.querySelector('#filter-status')!.textContent =
+            `显示 ${count} 个作品`;
+        }),
+      );
+    }
+  </script>
+</Layout>

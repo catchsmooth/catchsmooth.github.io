@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectArt from './ProjectArt.astro';
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const p = project.data;
+---
+
+<article class="project-row" data-category={p.category}>
+  <a
+    class="art-link"
+    href={`/projects/${project.id}/`}
+    aria-label={`查看${p.title}`}
+  >
+    <ProjectArt nodes={p.nodes} theme={p.theme} />
+  </a>
+  <div class="project-copy">
+    <span class="meta">
+      {p.category} / {p.tags.slice(0, 2).join(' + ')}
+    </span>
+    <h3>
+      <a href={`/projects/${project.id}/`}>{p.title}</a>
+    </h3>
+    <p>{p.description}</p>
+    <div class="tags">
+      {p.tags.map((tag) => (
+        <span>{tag}</span>
+      ))}
+    </div>
+    <a class="text-link" href={`/projects/${project.id}/`}>
+      了解这个项目 <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

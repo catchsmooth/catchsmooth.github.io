@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GuideList from '../../components/GuideList.astro';
+---
+
+<Layout title="AI 学习专题">
+  <section class="page-head wrap">
+    <span class="meta">把零散入口，连成阅读路径</span>
+    <h1>
+      先理清路线，再开始<span class="blue-dot">.</span>
+    </h1>
+    <p>
+      围绕三个开发任务，整理概念、选择思路与官方入口。
+      <br />
+      这是编辑阅读指南，不是产品实测或完整实操教程。
+    </p>
+  </section>
+  <section class="wrap guides-index">
+    <GuideList />
+    <div class="quiet-note">
+      每篇专题都引用目录中的资源，帮助你理解该先看什么、为什么看它。
+    </div>
+  </section>
+</Layout>

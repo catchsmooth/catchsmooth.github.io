@@ -1,0 +1,175 @@
+---
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+import '../styles/catalog.css';
+import { profile } from '../data/profile';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = 'AI 工具与开发资源精选', description = profile.intro } =
+  Astro.props;
+const nav = [
+  ['/', '首页'],
+  ['/tools/', '工具'],
+  ['/guides/', '专题'],
+  ['/about/', '关于'],
+];
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F7FAFD" />
+    <title>{title} · smo*oth</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="icon" href="/logo.ico" />
+    <meta property="og:title" content={`${title} · smo*oth`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={new URL(path, Astro.site)} />
+    <meta property="og:image" content={new URL('/social.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <noscript>
+      <style is:inline>
+        @media (max-width: 600px) {
+          body .header {
+            height: auto;
+            flex-wrap: wrap;
+            padding-top: 20px;
+          }
+          body .header nav {
+            display: flex;
+            position: static;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 15px 0;
+            box-shadow: none;
+            border: 0;
+            gap: 10px;
+          }
+          .header nav .nav-contact {
+            margin: 0;
+          }
+          .header nav a[aria-current='page']:after {
+            display: none;
+          }
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      跳到正文
+    </a>
+    <header class="header wrap">
+      <a class="wordmark" href="/" aria-label="smo*oth 首页">
+        smo<span>✳</span>oth<span class="brand-dot">.</span>
+      </a>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="main-nav"
+        hidden
+      >
+        菜单 <span aria-hidden="true">＋</span>
+      </button>
+      <nav id="main-nav" aria-label="主导航">
+        {nav.map(([href, label]) => (
+          <a
+            href={href}
+            aria-current={
+              (href === '/' ? path === '/' : path.startsWith(href))
+                ? 'page'
+                : undefined
+            }
+          >
+            {label}
+          </a>
+        ))}
+        <a class="nav-contact" href={`mailto:${profile.email}`}>
+          推荐资源 <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <section class="contact wrap">
+      <div>
+        <span class="meta">让这份精选更有用</span>
+        <h2>有值得收录的资源？</h2>
+        <p>告诉我它能解决什么问题，附上官方入口。</p>
+      </div>
+      <div class="contact-actions">
+        <a class="button" href={`mailto:${profile.email}`}>
+          写一封邮件 <span aria-hidden="true">↗</span>
+        </a>
+        <button class="copy-email" data-email={profile.email} hidden>
+          复制邮箱
+        </button>
+        <span class="copy-status" role="status"></span>
+      </div>
+    </section>
+    <footer class="footer wrap">
+      <div>
+        <a class="wordmark" href="/">
+          smo<span>✳</span>oth.
+        </a>
+        <p>给开发任务，找一个清晰的 AI 起点。</p>
+      </div>
+      <div class="footer-links">
+        <a href={profile.github}>GitHub ↗</a>
+        <a href="https://codeai.host">codeai.host ↗</a>
+        <a href="/notes/">过往记录</a>
+        <a href="/life/">旧时光，在这里</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© {new Date().getFullYear()} smo*oth</span>
+        <span>Curated for builders. Linked to the source.</span>
+        <a href="#main">回到顶部 ↑</a>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#main-nav');
+      if (toggle && nav) {
+        toggle.hidden = false;
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open));
+          nav.classList.toggle('is-open', open);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            const restoreFocus = nav.contains(document.activeElement);
+            toggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+            if (restoreFocus) toggle.focus();
+          }
+        });
+      }
+      const copyButton =
+        document.querySelector<HTMLButtonElement>('.copy-email');
+      if (copyButton) copyButton.hidden = false;
+      document
+        .querySelector<HTMLButtonElement>('.copy-email')
+        ?.addEventListener('click', async (e) => {
+          const button = e.currentTarget as HTMLButtonElement;
+          const status = document.querySelector('.copy-status');
+          try {
+            await navigator.clipboard.writeText(button.dataset.email!);
+            if (status) status.textContent = '邮箱已复制';
+          } catch {
+            if (status) status.textContent = `请复制：${button.dataset.email}`;
+          }
+        });
+    </script>
+  </body>
+</html>

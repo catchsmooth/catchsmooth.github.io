@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Resource from '../components/Resource.astro';
+import GuideList from '../components/GuideList.astro';
+import { categories } from '../data/categories';
+import { getCatalog } from '../lib/catalog';
+const { resources } = await getCatalog();
+const featured = resources
+  .filter((r) => r.data.featuredOrder)
+  .sort((a, b) => a.data.featuredOrder! - b.data.featuredOrder!);
+---
+
+<Layout>
+  <section class="ai-hero wrap">
+    <div class="ai-hero-top">
+      <span class="editor-label">
+        <span aria-hidden="true"></span>smo*oth 的开发者资源精选
+      </span>
+      <span class="edition">人工整理 · 官方来源</span>
+    </div>
+    <div class="ai-hero-title">
+      <h1>
+        找到下一步
+        <br />
+        用得上的 AI 工具<span class="blue-dot">.</span>
+      </h1>
+      <div class="hero-side">
+        <span class="hero-asterisk" aria-hidden="true">
+          ✳
+        </span>
+        <p>
+          从写代码到构建 Agent，
+          <br />
+          少一点盲目搜索，多一个清晰起点。
+        </p>
+      </div>
+    </div>
+    <form class="catalog-search home-search" action="/tools/" role="search">
+      <label for="home-query">你想用 AI 做什么？</label>
+      <div class="search-box">
+        <svg
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"
+        >
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </svg>
+        <input
+          id="home-query"
+          name="q"
+          type="search"
+          placeholder="搜工具、用途或标签"
+        />
+        <button class="button" type="submit">
+          查找资源 <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </form>
+    <div class="search-suggestions">
+      <span>从这里开始</span>
+      <a href="/tools/?q=TypeScript">TypeScript</a>
+      <a href="/tools/?q=MCP">MCP</a>
+      <a href="/tools/?q=本地模型">本地模型</a>
+      <a href="/tools/">全部 {resources.length} 项资源 ↗</a>
+    </div>
+  </section>
+  <section class="scenario-section wrap" aria-labelledby="scenario-title">
+    <div class="small-heading">
+      <h2 id="scenario-title">按你正在做的事，找到入口</h2>
+      <span>六个方向，各有起点</span>
+    </div>
+    <div class="scenarios">
+      {categories.map((c) => (
+        <a href={`/tools/?category=${c.id}`}>
+          <span class="scenario-icon" aria-hidden="true">
+            {c.symbol}
+          </span>
+          <h3>{c.name}</h3>
+          <p>{c.description}</p>
+          <span class="scenario-bottom">
+            {c.task}
+            <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="section wrap">
+    <div class="section-heading">
+      <div>
+        <span class="meta">从不同任务中各选一个起点</span>
+        <h2>
+          编辑精选<span class="blue-dot">.</span>
+        </h2>
+      </div>
+      <a class="text-link" href="/tools/">
+        浏览完整目录 ↗
+      </a>
+    </div>
+    <div class="featured-resources">
+      {featured.map((resource) => (
+        <Resource resource={resource} compact />
+      ))}
+    </div>
+    <p class="catalog-footnote">
+      精选代表编辑阅读入口，不是排名或实测推荐。每项说明均附官方资料入口与核查日期。
+    </p>
+  </section>
+  <section class="guide-band">
+    <div class="section wrap">
+      <div class="section-heading">
+        <div>
+          <span class="meta">工具很多，先理清路线</span>
+          <h2>不知道从哪里开始？</h2>
+        </div>
+        <a class="text-link" href="/guides/">
+          查看全部专题 ↗
+        </a>
+      </div>
+      <GuideList />
+    </div>
+  </section>
+  <section class="editor-note wrap">
+    <span class="editor-note-symbol" aria-hidden="true">
+      ✳
+    </span>
+    <div>
+      <h2>不是越多越好，而是更容易找到。</h2>
+      <p>
+        这里整理开发者用得上的 AI
+        工具、官方文档与开源项目。按用途组织，只描述有依据的能力，把判断留给具体任务。
+      </p>
+      <a class="text-link" href="/about/">
+        了解收录方式 ↗
+      </a>
+    </div>
+  </section>
+</Layout>

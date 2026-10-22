@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { categories } from '../data/categories';
+interface Props {
+  resource: CollectionEntry<'resources'>;
+  compact?: boolean;
+}
+const { resource, compact = false } = Astro.props;
+const r = resource.data;
+const category = categories.find((c) => c.id === r.category)!;
+---
+
+<article
+  class:list={['resource', compact && 'compact']}
+  data-resource
+  data-search={`${r.name} ${r.description} ${r.useCase} ${r.tags.join(' ')}`.toLocaleLowerCase()}
+>
+  <div class="resource-heading">
+    <span class:list={['resource-mark', r.category]} aria-hidden="true">
+      {r.name.slice(0, 2)}
+    </span>
+    <div>
+      <span class="resource-category">{category.name}</span>
+      <h3>
+        <a href={r.website}>
+          {r.name}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </h3>
+    </div>
+  </div>
+  <p class="resource-description">{r.description}</p>
+  {!compact && <p class="resource-use">{r.useCase}</p>}
+  <div class="resource-tags">
+    {r.tags.map((tag) => (
+      <span>{tag}</span>
+    ))}
+  </div>
+  <div class="resource-bottom">
+    <a href={r.website} aria-label={`打开 ${r.name} 官方入口`}>
+      官方入口 <span aria-hidden="true">↗</span>
+    </a>
+    {r.docs && <a href={r.docs}>文档 ↗</a>}
+    {r.repository && r.repository !== r.website && (
+      <a href={r.repository}>仓库 ↗</a>
+    )}
+    <span>
+      资料核查{' '}
+      <time datetime={r.checkedAt}>{r.checkedAt.replaceAll('-', '.')}</time>
+    </span>
+  </div>
+</article>

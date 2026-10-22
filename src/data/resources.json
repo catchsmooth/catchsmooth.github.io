@@ -1,0 +1,250 @@
+[
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "description": "将代码理解、功能开发和改动审查放在同一个 AI 编程环境中。",
+    "useCase": "想从现有代码库开始修改功能时，先阅读官方入门与 Agent 文档。",
+    "category": "coding",
+    "tags": ["IDE", "代码理解", "Agent"],
+    "website": "https://cursor.com/docs",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 1
+  },
+  {
+    "id": "claude-code",
+    "name": "Claude Code",
+    "description": "面向代码库工作的编程助手，可读取文件、编辑代码并执行开发命令。",
+    "useCase": "偏好终端工作流时，从官方概览了解运行方式与常见开发任务。",
+    "category": "coding",
+    "tags": ["CLI", "代码库", "编程助手"],
+    "website": "https://code.claude.com/docs/en/overview",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "codex",
+    "name": "Codex",
+    "description": "OpenAI 的编程工具与学习资源入口，涵盖代码开发、审查和工程工作流。",
+    "useCase": "准备将编程助手放进开发流程时，从官方 Codex 学习资料选择起点。",
+    "category": "coding",
+    "tags": ["OpenAI", "编程", "代码审查"],
+    "website": "https://developers.openai.com/learn/codex",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "copilot",
+    "name": "GitHub Copilot",
+    "description": "在 GitHub 与开发工具中提供代码建议、代码问答和任务协作。",
+    "useCase": "希望沿用现有仓库与开发流程时，先了解官方介绍中的不同工作方式。",
+    "category": "coding",
+    "tags": ["GitHub", "代码补全", "代码审查"],
+    "website": "https://docs.github.com/en/copilot/get-started/about-github-copilot",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "mcp",
+    "name": "Model Context Protocol",
+    "description": "连接 AI 应用与外部数据、工具和工作流的开放协议。",
+    "useCase": "先理解客户端、服务器与工具的关系，再决定要连接什么能力。",
+    "category": "agents",
+    "tags": ["MCP", "协议", "工具连接"],
+    "website": "https://modelcontextprotocol.io/docs/getting-started/intro",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 2
+  },
+  {
+    "id": "langgraph",
+    "name": "LangGraph",
+    "description": "用于构建有状态 Agent 与工作流的编排框架。",
+    "useCase": "当任务需要明确的流程、状态和执行控制时，从官方概览阅读核心概念。",
+    "category": "agents",
+    "tags": ["Agent", "工作流", "状态"],
+    "website": "https://docs.langchain.com/oss/javascript/langgraph/overview",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "mcp-inspector",
+    "name": "MCP Inspector",
+    "description": "MCP 官方提供的交互式检查工具，用于连接和调试 MCP 服务器。",
+    "useCase": "已开始开发 MCP 服务时，用官方仓库的说明了解调试入口。",
+    "category": "agents",
+    "tags": ["MCP", "调试", "开发工具"],
+    "website": "https://github.com/modelcontextprotocol/inspector",
+    "repository": "https://github.com/modelcontextprotocol/inspector",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "playwright-mcp",
+    "name": "Playwright MCP",
+    "description": "通过 MCP 向 AI 客户端提供浏览器交互能力的 Playwright 工具。",
+    "useCase": "需要让 Agent 操作网页时，先阅读官方仓库的连接配置和能力说明。",
+    "category": "agents",
+    "tags": ["MCP", "浏览器", "Playwright"],
+    "website": "https://github.com/microsoft/playwright-mcp",
+    "repository": "https://github.com/microsoft/playwright-mcp",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "ai-sdk",
+    "name": "Vercel AI SDK",
+    "description": "面向 TypeScript 的 AI 开发工具集，组织模型调用、流式响应与工具调用。",
+    "useCase": "已有 Web 或 Node.js 项目时，从文档中的基础概念和入门示例开始。",
+    "category": "build",
+    "tags": ["TypeScript", "SDK", "流式响应"],
+    "website": "https://ai-sdk.dev/docs/introduction",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 3
+  },
+  {
+    "id": "langchain",
+    "name": "LangChain.js",
+    "description": "在 JavaScript 与 TypeScript 中组合模型、工具和 Agent 行为。",
+    "useCase": "需要用代码组合模型与工具时，先阅读官方概览中的最小 Agent 示例。",
+    "category": "build",
+    "tags": ["JavaScript", "TypeScript", "Agent"],
+    "website": "https://docs.langchain.com/oss/javascript/langchain/overview",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "llamaindex",
+    "name": "LlamaIndex",
+    "description": "围绕数据接入、索引与检索组织 LLM 应用的开发框架。",
+    "useCase": "想让模型使用自己的文档数据时，从官方框架文档理解检索链路。",
+    "category": "build",
+    "tags": ["RAG", "数据检索", "Python"],
+    "website": "https://developers.llamaindex.ai/python/framework/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "litellm",
+    "name": "LiteLLM",
+    "description": "以统一接口组织多种模型服务，提供 SDK 与模型网关。",
+    "useCase": "需要连接多个模型供应方时，从官方文档区分 SDK 与网关的用途。",
+    "category": "build",
+    "tags": ["网关", "API", "多模型"],
+    "website": "https://docs.litellm.ai/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "description": "提供模型运行、模型库与 API，支持在本机运行模型及应用接入。",
+    "useCase": "准备在电脑上试用模型时，从文档中的本地模型入口开始。",
+    "category": "models",
+    "tags": ["本地模型", "API", "推理"],
+    "website": "https://docs.ollama.com/",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 4
+  },
+  {
+    "id": "lm-studio",
+    "name": "LM Studio",
+    "description": "通过桌面应用管理和使用本地模型，并提供开发者接入方式。",
+    "useCase": "偏好图形界面时，从官方应用文档了解模型下载和运行流程。",
+    "category": "models",
+    "tags": ["桌面应用", "本地模型", "推理"],
+    "website": "https://lmstudio.ai/docs/app",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "transformers",
+    "name": "Transformers",
+    "description": "Hugging Face 的模型工具库，支持加载预训练模型并进行推理与训练。",
+    "useCase": "需要在 Python 中直接使用模型时，先阅读安装与 Pipeline 文档。",
+    "category": "models",
+    "tags": ["Python", "Hugging Face", "模型加载"],
+    "website": "https://huggingface.co/docs/transformers/index",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "vllm",
+    "name": "vLLM",
+    "description": "面向语言模型推理与服务部署的开源工具。",
+    "useCase": "准备提供模型推理服务时，先核对官方安装条件和入门说明。",
+    "category": "models",
+    "tags": ["模型服务", "推理", "开源"],
+    "website": "https://docs.vllm.ai/en/latest/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity API",
+    "description": "提供网络搜索与基于网页信息的回答能力，供应用接入。",
+    "useCase": "需要把在线资料检索加入产品时，从官方 API 入门了解可用接口。",
+    "category": "research",
+    "tags": ["网络搜索", "研究", "API"],
+    "website": "https://docs.perplexity.ai/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "tavily",
+    "name": "Tavily",
+    "description": "面向 AI 应用的网页搜索与内容提取工具，提供 API 和集成入口。",
+    "useCase": "想为 Agent 补充联网检索时，先从官方文档选择接入方式。",
+    "category": "research",
+    "tags": ["搜索", "Agent", "网页提取"],
+    "website": "https://docs.tavily.com/",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 5
+  },
+  {
+    "id": "exa",
+    "name": "Exa",
+    "description": "为 Agent 与应用提供网页搜索、内容获取和研究接口。",
+    "useCase": "需要在代码中查找网页并取得正文时，从官方示例查看搜索与内容接口。",
+    "category": "research",
+    "tags": ["搜索", "网页内容", "API"],
+    "website": "https://exa.ai/docs",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "jina-reader",
+    "name": "Jina Reader",
+    "description": "将网页地址转换为更适合模型读取的内容，支持 Markdown 等输出。",
+    "useCase": "已有文章地址、需要整理正文时，从官方 Reader 页面了解转换参数。",
+    "category": "research",
+    "tags": ["网页读取", "Markdown", "资料整理"],
+    "website": "https://jina.ai/reader/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "v0",
+    "name": "v0",
+    "description": "通过自然语言生成与迭代界面、应用代码和可交互原型。",
+    "useCase": "需要先看见产品界面时，从官方入门与提示文档组织需求。",
+    "category": "creative",
+    "tags": ["UI", "原型", "应用生成"],
+    "website": "https://v0.app/docs",
+    "checkedAt": "2026-10-23",
+    "featuredOrder": 6
+  },
+  {
+    "id": "bolt",
+    "name": "Bolt",
+    "description": "在浏览器中通过 AI 构建、预览与迭代应用的开发工具。",
+    "useCase": "希望从想法快速进入可预览的应用时，从官方 QuickStart 开始。",
+    "category": "creative",
+    "tags": ["原型", "Web", "应用生成"],
+    "website": "https://support.bolt.new/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "comfyui",
+    "name": "ComfyUI",
+    "description": "以节点与工作流组织生成式媒体任务的开源应用。",
+    "useCase": "需要可组合的图片生成流程时，从官方基础概念理解节点、连线和工作流。",
+    "category": "creative",
+    "tags": ["图片", "节点工作流", "生成式媒体"],
+    "website": "https://docs.comfy.org/",
+    "checkedAt": "2026-10-23"
+  },
+  {
+    "id": "fal",
+    "name": "fal",
+    "description": "提供生成式媒体模型 API 与应用接入文档。",
+    "useCase": "需要在产品里调用媒体生成能力时，从官方快速入门了解 API 调用流程。",
+    "category": "creative",
+    "tags": ["媒体生成", "API", "开发平台"],
+    "website": "https://fal.ai/docs/documentation",
+    "checkedAt": "2026-10-23"
+  }
+]

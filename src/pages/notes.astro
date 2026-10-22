@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Notes from '../components/Notes.astro';
+---
+
+<Layout title="记录">
+  <section class="page-head wrap">
+    <span class="meta">给思考一个停靠的地方</span>
+    <h1>
+      边做，边记录<span class="blue-dot">.</span>
+    </h1>
+    <p>
+      一些工程实践，一些生活观察。
+      <br />
+      这里收录精选摘要，完整文章保留在 codeai.host。
+    </p>
+  </section>
+  <section class="wrap notes-page">
+    <Notes />
+    <div class="quiet-note">
+      好奇心没有明确的分类。更多技术文章、资源与日常，
+      <a href="https://codeai.host/en/blog">在原站继续阅读 ↗</a>
+    </div>
+  </section>
+</Layout>

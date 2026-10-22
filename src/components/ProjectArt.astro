@@ -1,0 +1,29 @@
+---
+interface Props {
+  nodes: string[];
+  theme: string;
+}
+const { nodes, theme } = Astro.props;
+---
+
+<div class:list={['project-art', theme]} aria-label="项目技术结构示意">
+  <div class="art-top">
+    <span class="art-symbol" aria-hidden="true">
+      ✳
+    </span>
+    <span>连接想法与实现</span>
+    <span aria-hidden="true">＋</span>
+  </div>
+  <div class="architecture">
+    <div class="architecture-core">
+      <span aria-hidden="true">{}</span>
+      <strong>{nodes[3]}</strong>
+    </div>
+    <div class="architecture-nodes">
+      {nodes.slice(0, 3).map((node) => (
+        <span>{node}</span>
+      ))}
+    </div>
+  </div>
+  <small>技术结构示意 · 非产品截图</small>
+</div>

@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCatalog } from '../../lib/catalog';
+import { render } from 'astro:content';
+export async function getStaticPaths() {
+  const { guides } = await getCatalog();
+  return guides.map((guide) => ({
+    params: { id: guide.id },
+    props: { guide },
+  }));
+}
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+const { resources } = await getCatalog();
+const related = guide.data.resources.map((id) =>
+  resources.find((r) => r.id === id)!,
+);
+---
+
+<Layout title={guide.data.title} description={guide.data.description}>
+  <section class="page-head wrap guide-head">
+    <a class="text-link" href="/guides/">
+      ← 返回专题
+    </a>
+    <p class="meta detail-meta">
+      编辑阅读路径 · 资料核查 {guide.data.checkedAt}
+    </p>
+    <h1>
+      {guide.data.title}
+      <span class="blue-dot">.</span>
+    </h1>
+    <p>{guide.data.description}</p>
+  </section>
+  <div class="guide-layout wrap">
+    <article class="prose">
+      <Content />
+    </article>
+    <aside class="guide-resources">
+      <h2>本篇官方入口</h2>
+      <p>按专题中的阅读顺序选择。</p>
+      <ol>
+        {related.map((r) => (
+          <li>
+            <a href={r.data.website}>
+              {r.data.name}
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p>{r.data.useCase}</p>
+          </li>
+        ))}
+      </ol>
+      <a class="text-link" href="/tools/">
+        回到完整工具目录 ↗
+      </a>
+    </aside>
+  </div>
+</Layout>

@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+const photos = [
+  { file: 'love1', alt: '双手在夕阳前围成心形', caption: '把夕阳，留在手心。' },
+  { file: 'love2', alt: '旧站收藏图片 love2', caption: '旧站收藏 · 一帧光影' },
+  {
+    file: 'love3',
+    alt: '旧站收藏图片 love3',
+    caption: '旧站收藏 · 柔软的片刻',
+  },
+  { file: '3', alt: '紫色光影中的心形剪影', caption: '从前的头像，也是记忆。' },
+  { file: 'bg', alt: '旧站背景图片', caption: '旧站收藏 · 曾经的背景' },
+  {
+    file: '海贼王',
+    alt: '旧站收藏的海贼王动漫图片',
+    caption: '热爱，总有它的位置。',
+  },
+];
+---
+
+<Layout title="生活与旧时光">
+  <section class="page-head wrap">
+    <span class="meta">一些不赶时间的片刻</span>
+    <h1>
+      把日常，留成故事<span class="blue-dot">.</span>
+    </h1>
+    <p>
+      这些图片来自多年前的旧站收藏。
+      <br />
+      它们不是作品截图，也不必代表现在，只是一直被保留下来的喜欢。
+    </p>
+  </section>
+  <section class="wrap life-content">
+    <div class="music">
+      <div class="record" aria-hidden="true">
+        <span>✳</span>
+      </div>
+      <div>
+        <span class="meta">旧站的声音</span>
+        <h2>醉赤壁</h2>
+        <p>林俊杰 · 一首老歌，一段旧时光</p>
+      </div>
+      <audio controls preload="none" aria-label="播放林俊杰的醉赤壁">
+        <source src="/media/林俊杰 - 醉赤壁.mp3" type="audio/mpeg" />
+        你的浏览器不支持音频播放。
+        <a href="/media/林俊杰 - 醉赤壁.mp3">打开音频</a>
+      </audio>
+    </div>
+    <div class="gallery">
+      {photos.map((p) => (
+        <figure>
+          <a
+            class="photo-open"
+            href={`/img/${p.file}.jpg`}
+            data-caption={p.caption}
+          >
+            <img
+              src={`/images/${p.file}.webp`}
+              alt={p.alt}
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+            <span class="photo-zoom" aria-hidden="true">
+              ↗
+            </span>
+            <span class="sr-only">放大查看</span>
+          </a>
+          <figcaption>{p.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="quiet-note">保留原来的图片，是给这个站点留下一点来时的痕迹。</p>
+  </section>
+  <dialog class="lightbox" aria-label="图片查看器">
+    <button class="lightbox-close" aria-label="关闭图片查看器">
+      关闭 ×
+    </button>
+    <img alt="" />
+    <p></p>
+  </dialog>
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('.lightbox')!;
+    let opener: HTMLElement | null = null;
+    document.querySelectorAll<HTMLAnchorElement>('.photo-open').forEach((a) =>
+      a.addEventListener('click', (event) => {
+        event.preventDefault();
+        opener = a;
+        const image = dialog.querySelector('img')!;
+        image.src = a.href;
+        image.alt = a.querySelector('img')!.alt;
+        dialog.querySelector('p')!.textContent = a.dataset.caption!;
+        dialog.showModal();
+        document.body.classList.add('modal-open');
+      }),
+    );
+    dialog
+      .querySelector('button')!
+      .addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('modal-open');
+      opener?.focus();
+    });
+  </script>
+</Layout>

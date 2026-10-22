@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+const notes = (await getCollection('notes')).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date),
+);
+---
+
+<div class="notes-list">
+  {notes.map(({ data: n }) => (
+    <article class="note">
+      <div class="note-meta">
+        <span>{n.category}</span>
+        <time datetime={n.date}>{n.date.replaceAll('-', '.')}</time>
+      </div>
+      <div>
+        <h3>
+          <a href={n.source}>
+            {n.title}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </h3>
+        <p>{n.description}</p>
+        <a class="note-source" href={n.source}>
+          在 codeai.host 阅读原文
+        </a>
+      </div>
+    </article>
+  ))}
+</div>
